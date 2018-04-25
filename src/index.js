@@ -16,10 +16,9 @@ class Square extends React.Component {
       <input type = "text"
         className="square"
         value={this.props.value}
-        onChange={() => this.props.onChange()}
+        onChange={(e) => this.props.onChange(e.target.value)}
         // onChange={() => this.setState({value})}
       />
-        
     );
   }
 }
@@ -32,19 +31,18 @@ class Board extends React.Component {
     };
   }
 
-  handleChange(i) {
+  handleChange(i, value) {
     console.log ( "i is " + i)
-    console.log (i.target.value);
     const squares = this.state.squares.slice();
-    squares[i] = i.target.value;
+    squares[i] = value
     this.setState({squares: squares});
   }
 
-  renderSquare(i) {
+  renderSquare(value) {
     return (
       <Square 
-        value={this.state.squares[i]}
-        onChange={(event, i) => this.handleChange(i)}
+        value={this.state.squares[value]}
+        onChange={(e) => this.handleChange(value, e)}
       />
     );
   }
