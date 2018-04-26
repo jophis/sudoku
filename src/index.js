@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import easyGame from './newGames.js'
 
 class Square extends React.Component {
   constructor(props) {
@@ -13,43 +14,27 @@ class Square extends React.Component {
   render() {
     console.log(this.state.value)
     return (
-      <input type = "text"
+      <input type = "numerical"
         className="square"
         value={this.props.value}
-        onChange={(e) => this.props.onChange(e.target.value)}
+        onChange={(squareID) => this.props.onChange(squareID.target.value)}
       />
     );
   }
 }
 
 class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      squares: Array(81).fill(''),
-    };
-  }
-
-  handleChange(squareID, value) {
-    console.log ( "squareID is " + squareID)
-    console.log ( "value is " + value)
-    const squares = this.state.squares.slice();
-    squares[squareID] = value
-    this.setState({squares: squares});
-  }
-
   renderSquare(value) {
     return (
       <Square 
-        value={this.state.squares[value]}
-        onChange={(e) => this.handleChange(value, e)}
+        value={this.props.squares[value]}
+        onChange={(e) => this.props.onChange(value, e)}
       />
     );
   }
 
   render() {
     const title = 'sudoku';
-    console.log (this.state.squares)
 
     // sets up board
     return (
@@ -99,15 +84,48 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(81).fill(''),
+    };
+  }
+
+  handleChange(squareID, value) {
+    console.log ( "squareID is " + squareID)
+    console.log ( "value is " + value)
+    const squares = this.state.squares.slice();
+    squares[squareID] = value
+    this.setState({squares: squares});
+  }
+
+  setNewGame(newGameSquares){
+    this.setState({
+      squares: newGameSquares
+    })
+  }
+
   render() {
+    console.log (this.state.squares)
+    console.log ("easyGame" + easyGame)
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board 
+            squares={this.state.squares}
+            onChange={(squareID, value) => 
+              this.handleChange(squareID, value)}
+          />
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
+          <ul>
+            <button onClick={()=> validateSudoku(this.state.squares)}>
+            Validate Puzzle
+            </button>
+            <button onClick={()=> this.setNewGame(easyGame)}>
+            New Easy Game
+            </button>
+          </ul>
         </div>
       </div>
     );
@@ -120,3 +138,9 @@ ReactDOM.render(
   <Game />,
   document.getElementById('root')
 );
+
+function validateSudoku(squares) {
+  console.log ("validating")
+  console.log (squares)
+  return true
+}
