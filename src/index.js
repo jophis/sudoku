@@ -12,12 +12,16 @@ class Square extends React.Component {
   }
 
   render() {
-    console.log(this.state.value)
+    // this regex verifies only numerical values are entered
+    const re = /^[0-9\b]+$/;
     return (
       <input type = "numerical"
         className="square"
+        maxLength= "1"
         value={this.props.value}
-        onChange={(squareID) => this.props.onChange(squareID.target.value)}
+        onChange={(squareID) => 
+          {if (squareID.target.value == '' || re.test(squareID.target.value)) {
+                   this.props.onChange(squareID.target.value)}}}
       />
     );
   }
@@ -87,7 +91,7 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares: Array(81).fill(''),
+      squares: Array(81).fill(""),
     };
   }
 
