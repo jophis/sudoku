@@ -1,4 +1,4 @@
-const easyGame = [
+let easyGame = [
 "", "", "", "2", "6", "", "7", "", "1",
  "6", "8", "", "", "7", "", "", "9", "",
  "1", "9", "", "", "", "4", "5", "", "",
@@ -11,4 +11,4 @@ const easyGame = [
  ];
 
 
- module.exports = [easyGame];
+ module.exports = easyGame;
