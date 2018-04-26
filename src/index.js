@@ -17,7 +17,6 @@ class Square extends React.Component {
         className="square"
         value={this.props.value}
         onChange={(e) => this.props.onChange(e.target.value)}
-        // onChange={() => this.setState({value})}
       />
     );
   }
@@ -31,10 +30,11 @@ class Board extends React.Component {
     };
   }
 
-  handleChange(i, value) {
-    console.log ( "i is " + i)
+  handleChange(squareID, value) {
+    console.log ( "squareID is " + squareID)
+    console.log ( "value is " + value)
     const squares = this.state.squares.slice();
-    squares[i] = value
+    squares[squareID] = value
     this.setState({squares: squares});
   }
 
