@@ -15,12 +15,13 @@ class Square extends React.Component {
     // this regex verifies only numerical values are entered
     const re = /^[0-9\b]+$/;
     return (
-      <input type = "numerical"
+      <input type = "text"
+        inputMode = "numeric"
         className="square"
         maxLength= "1"
         value={this.props.value}
         onChange={(squareID) => 
-          {if (squareID.target.value == '' || re.test(squareID.target.value)) {
+          {if (squareID.target.value === '' || re.test(squareID.target.value)) {
                    this.props.onChange(squareID.target.value)}}}
       />
     );
@@ -28,11 +29,11 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
-  renderSquare(value) {
+  renderSquare(squareID) {
     return (
       <Square 
-        value={this.props.squares[value]}
-        onChange={(e) => this.props.onChange(value, e)}
+        value={this.props.squares[squareID]}
+        onChange={(value) => this.props.onChange(squareID, value)}
       />
     );
   }
@@ -110,8 +111,8 @@ class Game extends React.Component {
   }
 
   render() {
-    console.log (this.state.squares)
-    console.log ("easyGame" + easyGame)
+    console.dir (this.state.squares)
+    console.dir (easyGame)
     return (
       <div className="game">
         <div className="game-board">
@@ -146,5 +147,19 @@ ReactDOM.render(
 function validateSudoku(squares) {
   console.log ("validating")
   console.log (squares)
+  var index = 0;
+  var squaresRows = []
+  var chunk = []
+
+  for(index = 0; index < 81; index += 9) {
+    chunk = squares.slice(index,index+9)
+    squaresRows.push(chunk)
+  }
+
+  console.log ("squaresRows is " + squaresRows)
+
+
+
+
   return true
 }
