@@ -69,7 +69,7 @@ ReactDOM.render(
 
 function validateSudoku(squares) {
   console.log ('validating')
-  console.dir (Validator.constructor(squares))
+  console.dir (Validator.reorganizeData(squares))
   // var result = Validator.constructor(squares).isValid()
   // console.log ("result " + result);
 }

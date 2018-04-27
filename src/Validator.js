@@ -3,9 +3,9 @@ export default class Validator {
   _cols; 
   _grid;
 
-  constructor(data) {
-    this.reorganizeData(data);
-  }
+  // constructor(data) {
+  //   this.reorganizeData(data);
+  // }
 
   // initialize the module with input data
   // function init(data) {
@@ -40,10 +40,20 @@ export default class Validator {
   };
 
   // reorganize data into three structures
-  _reorganizeData(data){
-      let _rows = data;
+  reorganizeData(data){
+      let _rows = [];
       let _cols = [];
       let _grid = [];
+      let _chunk = [];
+
+      // slices data into array of 9 arrays (puzzle rows)
+
+      for(var index = 0; index < 81; index += 9) {
+        _chunk = data.slice(index,index+9)
+        _rows.push(_chunk)
+      }
+
+      console.dir (_rows)
 
       // Prefilling the structures with empty array objects
       for (let i = 0; i < 9; i++) {
