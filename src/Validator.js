@@ -1,17 +1,12 @@
 export default class Validator {
-  _rows;
-  _cols; 
-  _grid;
-
-  // constructor(data) {
-  //   this.reorganizeData(data);
-  // }
-
-  // initialize the module with input data
-  // function init(data) {
-  //     _reorganizeData(data);
-  //     return this;
-  // };
+  constructor(data) {
+    
+    this._rows = []
+    this._cols =[]
+    this._grid = []
+    this._chunk = []
+    this._reorganizeData(data);
+  }
 
   // return true if sudoku is valid
   isValid() {
@@ -40,25 +35,20 @@ export default class Validator {
   };
 
   // reorganize data into three structures
-  reorganizeData(data){
-      let _rows = [];
-      let _cols = [];
-      let _grid = [];
-      let _chunk = [];
-
+  _reorganizeData(data){
       // slices data into array of 9 arrays (puzzle rows)
 
       for(var index = 0; index < 81; index += 9) {
-        _chunk = data.slice(index,index+9)
-        _rows.push(_chunk)
+        this._chunk = data.slice(index,index+9)
+        this._rows.push(this._chunk)
       }
 
-      console.dir (_rows)
+      console.dir (this._rows)
 
       // Prefilling the structures with empty array objects
       for (let i = 0; i < 9; i++) {
-          _cols.push([]);
-          _grid.push([]);
+          this._cols.push([]);
+          this._grid.push([]);
       }
       
       for (let row = 0; row < 9; row++) {
@@ -66,7 +56,7 @@ export default class Validator {
           for (let col = 0; col < 9; col++) {
 
               // Save each column in a new row
-              _cols[col][row] = data[row][col];
+              this._cols[col][row] = this._rows[row][col];
 
               // Calculate grid identifiers
               let gridRow = Math.floor( row / 3 );
@@ -74,7 +64,7 @@ export default class Validator {
               let gridIndex = gridRow * 3 + gridCol;
 
               // Save each grid in a new row
-              _grid[gridIndex].push(data[row][col]);        
+              this._grid[gridIndex].push(this._rows[row][col]);        
           }
       }
   }
