@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {easyGame, medGame, hardGame} from './newGames.js'
+import {easyGame, medGame, hardGame, endGame} from './newGames.js'
 import Board from './Board.js'
 import Validator from './Validator.js'
+import {Button, ButtonGroup} from 'react-bootstrap';
 
 class Game extends React.Component {
   constructor(props) {
@@ -24,12 +25,14 @@ class Game extends React.Component {
   setNewGame(newGameSquares){
     this.setState({
       squares: newGameSquares
+      // givenSquaresIndexes: newGameSquares.filter((square, index) => {
+      //   square? return index: false
+      // })
     })
   }
 
   render() {
     console.dir (this.state.squares)
-    console.dir (easyGame)
     return (
       <div className="game">
         <div className="game-board">
@@ -40,20 +43,27 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <ul>
-            <button onClick={()=> validateSudoku(this.state.squares)}>
-            Validate Puzzle
-            </button>
-            <button onClick={()=> this.setNewGame(easyGame)}>
-            New Easy Game
-            </button>
-            <button onClick={()=> this.setNewGame(medGame)}>
+          <ButtonGroup vertical>
+            <Button 
+              bsStyle="success"
+              onClick={()=> validateSudoku(this.state.squares)}>
+              Validate Puzzle
+            </Button>
+            <Button 
+              bsStyle="warning"
+              onClick={()=> this.setNewGame(easyGame)}>
+              New Easy Game
+            </Button>
+            <Button onClick={()=> this.setNewGame(medGame)}>
             New Medium Game
-            </button>
-            <button onClick={()=> this.setNewGame(hardGame)}>
+            </Button>
+            <Button onClick={()=> this.setNewGame(hardGame)}>
             New Hard Game
-            </button>
-          </ul>
+            </Button>
+            <Button onClick={()=> this.setNewGame(endGame)}>
+            New solved Game
+            </Button>
+          </ButtonGroup>
         </div>
       </div>
     );
@@ -68,8 +78,10 @@ ReactDOM.render(
 );
 
 function validateSudoku(squares) {
-  console.log ('validating')
-  console.dir (Validator.reorganizeData(squares))
-  // var result = Validator.constructor(squares).isValid()
-  // console.log ("result " + result);
+  // console.log ('validating')
+  // console.dir (Validator.constructor(squares))
+  var result = new Validator(squares).isValid()
+  console.log ("result " + result);
+  result? alert("success") : alert("failure")
+
 }
