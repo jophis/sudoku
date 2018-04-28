@@ -5,6 +5,7 @@ export default class Square extends React.Component {
 
   static propTypes = {
     value: PropTypes.number.isRequired,
+    given: PropTypes.boolean,
     onChange : PropTypes.func.isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
@@ -18,6 +19,7 @@ export default class Square extends React.Component {
         inputMode = "numeric"
         className="square"
         maxLength= "1"
+        disabled={this.props.given}
         value={this.props.value}
         onChange={(squareID) => 
           {if (squareID.target.value === '' || re.test(squareID.target.value)) {

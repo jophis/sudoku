@@ -4,7 +4,8 @@ import Square from './Square.js';
 
 export default class Board extends React.Component {
   static propTypes = {
-    value: PropTypes.number.isRequired,
+    squares: PropTypes.array,
+    givenSquares: PropTypes.array,
     onChange : PropTypes.func.isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
@@ -15,6 +16,7 @@ export default class Board extends React.Component {
       <Square 
         value={this.props.squares[squareID]}
         onChange={(value) => this.props.onChange(squareID, value)}
+        given= {this.props.givenSquares && this.props.givenSquares.includes(squareID)}
       />
     );
   }

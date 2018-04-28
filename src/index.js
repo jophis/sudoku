@@ -23,11 +23,14 @@ class Game extends React.Component {
   }
 
   setNewGame(newGameSquares){
+    var givenSquares = newGameSquares.map((value, index) => 
+      {if (value) return index}).filter((value) => value) 
+
+    console.log (givenSquares)
+
     this.setState({
-      squares: newGameSquares
-      // givenSquaresIndexes: newGameSquares.filter((square, index) => {
-      //   square? return index: false
-      // })
+      squares: newGameSquares,
+      givenSquares
     })
   }
 
@@ -38,6 +41,7 @@ class Game extends React.Component {
         <div className="game-board">
           <Board 
             squares={this.state.squares}
+            givenSquares = {this.state.givenSquares}
             onChange={(squareID, value) => 
               this.handleChange(squareID, value)}
           />
