@@ -68,7 +68,7 @@ class Game extends React.Component {
             <Button
               bsStyle="info" 
               onClick={()=> this.setNewGame(endGame)}>
-              New solved Game
+              Fill Easy Solution
             </Button>
           </ButtonGroup>
         </div>
