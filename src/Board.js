@@ -14,17 +14,18 @@ export default class Board extends React.Component {
   renderSquare(squareID) {
     return (
       <Square 
+        key= {squareID}
         value={this.props.squares[squareID]}
         onChange={(value) => this.props.onChange(squareID, value)}
+        // checks if square is given as part of starting puzzle scenario
         given= {this.props.givenSquares && this.props.givenSquares.includes(squareID)}
       />
     );
   }
 
   render() {
-    const title = 'sudoku';
-
-    // sets up board
+    const title = 'Sudoku';
+    // sets up board (awkwardly)
     return (
       <div>
         <div className="status">{title}</div>

@@ -3,10 +3,6 @@ body {
   margin: 20px;
 }
 
-ol, ul {
-  padding-left: 30px;
-}
-
 .board-row:after {
   clear: both;
   content: "";
@@ -63,4 +59,5 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+  margin-top: 28px;
 }

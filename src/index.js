@@ -15,18 +15,16 @@ class Game extends React.Component {
   }
 
   handleChange(squareID, value) {
-    console.log ( "squareID is " + squareID)
-    console.log ( "value is " + value)
     const squares = this.state.squares.slice();
     squares[squareID] = value
     this.setState({squares: squares});
   }
 
   setNewGame(newGameSquares){
+    // filters down to indexes of given squares (puzzle start scenario)
+    // so we can use this to disable given squares
     var givenSquares = newGameSquares.map((value, index) => 
       {if (value) return index}).filter((value) => value) 
-
-    console.log (givenSquares)
 
     this.setState({
       squares: newGameSquares,
@@ -35,7 +33,6 @@ class Game extends React.Component {
   }
 
   render() {
-    console.dir (this.state.squares)
     return (
       <div className="game">
         <div className="game-board">
@@ -54,18 +51,24 @@ class Game extends React.Component {
               Validate Puzzle
             </Button>
             <Button 
-              bsStyle="warning"
+              bsStyle="info"
               onClick={()=> this.setNewGame(easyGame)}>
               New Easy Game
             </Button>
-            <Button onClick={()=> this.setNewGame(medGame)}>
-            New Medium Game
+            <Button 
+              bsStyle="info"
+              onClick={()=> this.setNewGame(medGame)}>
+              New Medium Game
             </Button>
-            <Button onClick={()=> this.setNewGame(hardGame)}>
-            New Hard Game
+            <Button
+              bsStyle="info" 
+              onClick={()=> this.setNewGame(hardGame)}>
+              New Hard Game
             </Button>
-            <Button onClick={()=> this.setNewGame(endGame)}>
-            New solved Game
+            <Button
+              bsStyle="info" 
+              onClick={()=> this.setNewGame(endGame)}>
+              New solved Game
             </Button>
           </ButtonGroup>
         </div>
@@ -82,10 +85,7 @@ ReactDOM.render(
 );
 
 function validateSudoku(squares) {
-  // console.log ('validating')
-  // console.dir (Validator.constructor(squares))
   var result = new Validator(squares).isValid()
-  console.log ("result " + result);
-  result? alert("success") : alert("failure")
+  result? alert("Solution is correct, congratulations!") : alert("Solution is incorrect, try again.")
 
 }

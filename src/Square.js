@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 export default class Square extends React.Component {
 
   static propTypes = {
-    value: PropTypes.number.isRequired,
-    given: PropTypes.boolean,
+    value: PropTypes.string.isRequired,
+    given: PropTypes.bool,
     onChange : PropTypes.func.isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
@@ -16,7 +16,6 @@ export default class Square extends React.Component {
     const re = /^[0-9\b]+$/;
     return (
       <input type = "text"
-        inputMode = "numeric"
         className="square"
         maxLength= "1"
         disabled={this.props.given}

@@ -1,6 +1,5 @@
 export default class Validator {
   constructor(data) {
-    
     this._rows = []
     this._cols =[]
     this._grid = []
@@ -42,8 +41,6 @@ export default class Validator {
         this._chunk = data.slice(index,index+9)
         this._rows.push(this._chunk)
       }
-
-      console.dir (this._rows)
 
       // Prefilling the structures with empty array objects
       for (let i = 0; i < 9; i++) {
